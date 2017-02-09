@@ -10,12 +10,12 @@
   ------------------------------------------------------------------------
   This solution requires the Adafruit Windows IoT Class Library
 
-  Adafruit CharLCDPlate is free software: you can redistribute it and/or
+  Adafruit CharLcdPlate is free software: you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public License
   as published by the Free Software Foundation, either version 3 of
   the License, or (at your option) any later version.
 
-  Adafruit CharLCDPlate is distributed in the hope that it will be useful,
+  Adafruit CharLcdPlate is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU Lesser General Public License for more details.
@@ -39,10 +39,9 @@ namespace CharLCDPlateTest
 {
     public sealed class StartupTask : IBackgroundTask
     {
-        CharLCDPlate Plate;
+        CharLcdPlate Plate;
 
         ThreadPoolTimer counterTimer;
-        ThreadPoolTimer buttonTimer;
         int ticks;
 
         public async void Run(IBackgroundTaskInstance taskInstance)
@@ -55,13 +54,13 @@ namespace CharLCDPlateTest
             // described in http://aka.ms/backgroundtaskdeferral
             //
             BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
-            Plate = new CharLCDPlate();
+            Plate = new CharLcdPlate();
 
-            await Plate.Begin(16, 2).ConfigureAwait(false);
+            await Plate.BeginAsync(16, 2).ConfigureAwait(false);
 
             Plate.setCursor(0, 0);
             Plate.print("Hello, world!");
-            Plate.setBacklight(CharLCDPlate.WHITE);
+            Plate.setBacklight(CharLcdPlate.WHITE);
             Plate.setCursor(0, 1);
 
             ticks = 0;
@@ -94,30 +93,30 @@ namespace CharLCDPlateTest
                 {
                     Plate.clear();
                     Plate.setCursor(0, 0);
-                    if (0 != (buttons & CharLCDPlate.BUTTON_UP))
+                    if (0 != (buttons & CharLcdPlate.BUTTON_UP))
                     {
                         Plate.print("UP ");
-                        Plate.setBacklight(CharLCDPlate.RED);
+                        Plate.setBacklight(CharLcdPlate.RED);
                     }
-                    if (0 != (buttons & CharLCDPlate.BUTTON_DOWN))
+                    if (0 != (buttons & CharLcdPlate.BUTTON_DOWN))
                     {
                         Plate.print("DOWN ");
-                        Plate.setBacklight(CharLCDPlate.YELLOW);
+                        Plate.setBacklight(CharLcdPlate.YELLOW);
                     }
-                    if (0 != (buttons & CharLCDPlate.BUTTON_LEFT))
+                    if (0 != (buttons & CharLcdPlate.BUTTON_LEFT))
                     {
                         Plate.print("LEFT ");
-                        Plate.setBacklight(CharLCDPlate.GREEN);
+                        Plate.setBacklight(CharLcdPlate.GREEN);
                     }
-                    if (0 != (buttons & CharLCDPlate.BUTTON_RIGHT))
+                    if (0 != (buttons & CharLcdPlate.BUTTON_RIGHT))
                     {
                         Plate.print("RIGHT ");
-                        Plate.setBacklight(CharLCDPlate.TEAL);
+                        Plate.setBacklight(CharLcdPlate.TEAL);
                     }
-                    if (0 != (buttons & CharLCDPlate.BUTTON_SELECT))
+                    if (0 != (buttons & CharLcdPlate.BUTTON_SELECT))
                     {
                         Plate.print("SELECT ");
-                        Plate.setBacklight(CharLCDPlate.VIOLET);
+                        Plate.setBacklight(CharLcdPlate.VIOLET);
                     }
                 }
             }
